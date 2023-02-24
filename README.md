@@ -82,4 +82,4 @@ Serverless with Firebase:
 > [Angular 11 Upload File to Firebase Storage example](https://bezkoder.com/angular-11-file-upload-firebase-storage/)
 
 Integration (run back-end & front-end on same server/port)
-> [How to Integrate Angular with Spring Boot Rest API](https://bezkoder.com/integrate-angular-spring-boot/)
+> [How to Integrate Angular with Spring Boot Rest API](https://bezkoder.com/integrate-angular-spring-boot/)# poei2022libraryWithBugs

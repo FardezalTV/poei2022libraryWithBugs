@@ -1,0 +1,40 @@
+
+
+
+<div class="col-md-12 mt-2 card">
+  <div class="card-header">
+    Liste des livres
+  </div>
+  <div class="card-body">
+
+    <div class="card " *ngFor="let book of books$ | async">
+      <div class="card-body row">
+        <div class="col-md-3">{{book.title}}</div>
+        <div class="col-md-3">{{book.description}}</div>
+        <div class="col-md-3">{{book.parutionDate}}</div>
+        <div class="col-md-3">{{book.author.firstName}} {{book.author.lastName}}</div>
+        <div class="col-md-12"><button class="btn btn-primary" (click)="saveRenting(book)">Emprunter</button></div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+<div class="col-md-12 mt-2 card">
+  <div class="card-header">
+    Liste des emprunts
+  </div>
+  <div class="card-body">
+
+    <div class="card " *ngFor="let renting of rentings$ | async">
+      <div class="card-body row">
+        <div class="col-md-3">{{renting.book.title}}</div>
+        <div class="col-md-3">{{renting.startDate}}</div>
+        <div class="col-md-3">{{renting.endDate}}</div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
