@@ -1,4 +1,4 @@
-package com.bezkoder.springjwt.controllers;
+package com.freestack.controllers;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 	@GetMapping("/all")
 	public String allAccess() {
-		return "Public Content.";
+		return "Bienvenue.";
 	}
 	
 	@GetMapping("/user")

@@ -1,6 +1,7 @@
-package com.bezkoder.springjwt.models;
+package com.freestack.models;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -9,7 +10,6 @@ public class Renting {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
 	@ManyToOne
 	@JoinColumn(name = "book_id")
 	private Book book;
@@ -19,6 +19,8 @@ public class Renting {
 
 	private LocalDateTime startDate;
 	private LocalDateTime endDate;
+
+	private LocalDate dueDate;
 
 	public Long getId() {
 		return id;
@@ -58,5 +60,13 @@ public class Renting {
 
 	public void setEndDate(LocalDateTime endDate) {
 		this.endDate = endDate;
+	}
+
+	public LocalDate getDueDate() {
+		return dueDate;
+	}
+
+	public void setDueDate(LocalDate dueDate) {
+		this.dueDate = dueDate;
 	}
 }

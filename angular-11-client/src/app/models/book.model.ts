@@ -1,4 +1,6 @@
-export interface BookModel {
+import { Author } from './author.model';
+
+export class Book {
   id: number;
   title: string;
   isbn: string;

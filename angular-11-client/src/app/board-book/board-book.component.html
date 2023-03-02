@@ -1,52 +1,54 @@
-<div class="col-md-12 card">
+<ng-container *ngIf="isAdmin">
+  <div class="col-md-12 card">
 
-  <div class=" card-header">
-    Ajout d'un auteur
+    <div class=" card-header">
+      Ajout d'un auteur
+    </div>
+    <div class=" card-body">
+
+
+      <form class="form-horizontal">
+        <label for="book-title">Prénom</label><input id="firstname" [(ngModel)]="author.firstName"
+                                                     [ngModelOptions]="{standalone: true}">
+        <label for="book-desc">Nom</label><input id="lastname" [(ngModel)]="author.lastName"
+                                                 [ngModelOptions]="{standalone: true}">
+        <label for="book-dp">Date de naissance</label><input id="birthdate" type="date" [(ngModel)]="author.birthDate"
+                                                             [ngModelOptions]="{standalone: true}">
+      </form>
+      <button type="button" class="mt-2 btn btn-primary" (click)="saveAuthor()">Sauver auteur</button>
+    </div>
   </div>
-  <div class=" card-body">
+
+  <div class="col-md-12 card">
+
+    <div class=" card-header">
+      Ajout d'un livre
+    </div>
+    <div class=" card-body">
 
 
-    <form class="form-horizontal">
-      <label for="book-title">Prénom</label><input id="firstname" [(ngModel)]="author.firstName"
-                                                   [ngModelOptions]="{standalone: true}">
-      <label for="book-desc">Nom</label><input id="lastname" [(ngModel)]="author.lastName"
-                                               [ngModelOptions]="{standalone: true}">
-      <label for="book-dp">Date de naissance</label><input id="birthdate" type="date" [(ngModel)]="author.birthDate"
-                                                           [ngModelOptions]="{standalone: true}">
-    </form>
-    <button type="button" class="mt-2 btn btn-primary" (click)="saveAuthor()">Sauver auteur</button>
-  </div>
-</div>
-
-<div class="col-md-12 card">
-
-  <div class=" card-header">
-    Ajout d'un livre
-  </div>
-  <div class=" card-body">
-
-
-    <form class="form-horizontal">
-      <label for="book-title">Titre</label><input id="book-title" [(ngModel)]="book.title"
+      <form class="form-horizontal">
+        <label for="book-title">Titre</label><input id="book-title" [(ngModel)]="book.title"
+                                                    [ngModelOptions]="{standalone: true}">
+        <label for="book-desc">Description</label><input id="book-desc" [(ngModel)]="book.description"
+                                                         [ngModelOptions]="{standalone: true}">
+        <label for="book-isbn">Isbn</label><input id="book-isbn" [(ngModel)]="book.isbn"
                                                   [ngModelOptions]="{standalone: true}">
-      <label for="book-desc">Description</label><input id="book-desc" [(ngModel)]="book.description"
-                                                       [ngModelOptions]="{standalone: true}">
-      <label for="book-isbn">Isbn</label><input id="book-isbn" [(ngModel)]="book.isbn"
-                                                [ngModelOptions]="{standalone: true}">
-      <label for="book-dp">Date parution</label><input id="book-dp" type="date" [(ngModel)]="book.parutionDate"
-                                                       [ngModelOptions]="{standalone: true}">
-      <label for="author-select">Auteur</label><select name="author" id="author-select"
-                                                       [(ngModel)]="book.author"
-                                                       [ngModelOptions]="{standalone: true}">
-      <option value="">--Veuillez sélectionner un auteur--</option>
-      <option *ngFor="let _author of authors$ | async" [ngValue]="_author">
-        {{_author.firstName}} {{_author.lastName}}
-      </option>
-    </select>
-    </form>
-    <button type="button" class="mt-2 btn btn-primary" (click)="saveBook()">Creer livre</button>
+        <label for="book-dp">Date parution</label><input id="book-dp" type="date" [(ngModel)]="book.parutionDate"
+                                                         [ngModelOptions]="{standalone: true}">
+        <label for="author-select">Auteur</label><select name="author" id="author-select"
+                                                         [(ngModel)]="book.author"
+                                                         [ngModelOptions]="{standalone: true}">
+        <option value="">--Veuillez sélectionner un auteur--</option>
+        <option *ngFor="let _author of authors$ | async" [ngValue]="_author">
+          {{_author.firstName}} {{_author.lastName}}
+        </option>
+      </select>
+      </form>
+      <button type="button" class="mt-2 btn btn-primary" (click)="saveBook()">Creer livre</button>
+    </div>
   </div>
-</div>
+</ng-container>
 <div class="col-md-12 mt-2 card">
   <div class="card-header">
     Liste des livres
@@ -59,6 +61,7 @@
         <div class="col-md-3">{{book.description}}</div>
         <div class="col-md-3">{{book.parutionDate}}</div>
         <div class="col-md-3">{{book.author.firstName}} {{book.author.lastName}}</div>
+
       </div>
     </div>
 

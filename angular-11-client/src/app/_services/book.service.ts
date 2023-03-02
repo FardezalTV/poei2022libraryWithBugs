@@ -1,28 +1,34 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Book } from '../models/book.model';
+import { map } from 'rxjs/operators';
+import { plainToClass } from 'class-transformer';
 
-const API_URL = 'http://localhost:8080/api/test/';
+const API_URL = 'http://localhost:8080/api/books/';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
-  constructor(private http: HttpClient) { }
-
-  getPublicContent(): Observable<any> {
-    return this.http.get(API_URL + 'all', { responseType: 'text' });
+export class BookService {
+  constructor(private http: HttpClient) {
   }
 
-  getUserBoard(): Observable<any> {
-    return this.http.get(API_URL + 'user', { responseType: 'text' });
+  public getAll(): Observable<Book[]> {
+    return this.http.get(API_URL + 'all').pipe(map(response => {
+        return plainToClass(Book, response as Book[]);
+      }
+    ));
   }
 
-  getModeratorBoard(): Observable<any> {
-    return this.http.get(API_URL + 'mod', { responseType: 'text' });
+  public create(book: Book): Observable<Book> {
+    return this.http.post(API_URL, book)
+      .pipe(map(response => {
+          return plainToClass(Book, response as Book);
+        }
+      ));
+
   }
 
-  getAdminBoard(): Observable<any> {
-    return this.http.get(API_URL + 'admin', { responseType: 'text' });
-  }
+
 }

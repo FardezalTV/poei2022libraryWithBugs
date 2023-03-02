@@ -1,12 +1,11 @@
-package com.bezkoder.springjwt.repository;
+package com.freestack.repository;
 
 import java.util.Optional;
 
+import com.freestack.models.ERole;
+import com.freestack.models.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import com.bezkoder.springjwt.models.ERole;
-import com.bezkoder.springjwt.models.Role;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Long> {

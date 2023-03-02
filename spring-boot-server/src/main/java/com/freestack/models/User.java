@@ -1,4 +1,6 @@
-package com.bezkoder.springjwt.models;
+package com.freestack.models;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.HashSet;
 import java.util.List;
@@ -40,6 +42,7 @@ public class User {
 	private Set<Role> roles = new HashSet<>();
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@JsonIgnore
 	private List<Renting> rentings;
 
 	public User() {
@@ -89,5 +92,13 @@ public class User {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	public List<Renting> getRentings() {
+		return rentings;
+	}
+
+	public void setRentings(List<Renting> rentings) {
+		this.rentings = rentings;
 	}
 }

@@ -25,9 +25,12 @@ export class BookComponent implements OnInit {
   authors$: Observable<Author[]> | undefined;
   book = new Book();
   author = new Author();
+  isAdmin = false;
 
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService,
               private bookService: BookService, private authorService: AuthorService) {
+    debugger;
+    this.isAdmin = tokenStorage.getUser()?.roles.includes('ROLE_ADMIN') ?? false;
   }
 
   ngOnInit(): void {

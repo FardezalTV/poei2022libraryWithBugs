@@ -1,24 +1,27 @@
-package com.bezkoder.springjwt.models;
+package com.freestack.models;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "authors",
 uniqueConstraints = {
-@UniqueConstraint(columnNames = "firstName"),// TODO bug une seule occurence de prénom est possible
+@UniqueConstraint(columnNames = "firstName"),
 @UniqueConstraint(columnNames = "lastName")
 })
 public class Author {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	@OneToMany(mappedBy = "author")
+	@JsonIgnore
+	private List<Book> books;
 	private String firstName;
 	private String lastName;
 	private LocalDate birthDate;
-
 
 	public String getFirstName() {
 		return firstName;
@@ -52,5 +55,11 @@ public class Author {
 		this.id = id;
 	}
 
+	public List<Book> getBooks() {
+		return books;
+	}
 
+	public void setBooks(List<Book> books) {
+		this.books = books;
+	}
 }

@@ -1,8 +1,7 @@
-package com.bezkoder.springjwt.repository;
+package com.freestack.repository;
 
-import com.bezkoder.springjwt.models.Author;
-import com.bezkoder.springjwt.models.Book;
-import com.bezkoder.springjwt.models.User;
+import com.freestack.models.Author;
+import com.freestack.models.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

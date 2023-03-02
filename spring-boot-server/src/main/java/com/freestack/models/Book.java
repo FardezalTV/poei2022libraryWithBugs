@@ -1,4 +1,6 @@
-package com.bezkoder.springjwt.models;
+package com.freestack.models;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -17,6 +19,7 @@ public class Book {
 	private Long id;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "book")
+	@JsonIgnore
 	private List<Renting> rentings;
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "author_id")
@@ -74,5 +77,11 @@ public class Book {
 		this.id = id;
 	}
 
+	public List<Renting> getRentings() {
+		return rentings;
+	}
 
+	public void setRentings(List<Renting> rentings) {
+		this.rentings = rentings;
+	}
 }

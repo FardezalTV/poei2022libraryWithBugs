@@ -42,10 +42,11 @@ export class RentingsBookComponent implements OnInit {
     const renting = new Renting();
     renting.book = book;
     renting.user = this.tokenStorage.getUser();
+    delete renting.user.roles;
     this.rentingService.create(renting).subscribe();
   }
 
   listRentings(): void {
-    this.rentings$ = this.rentingService.getAll();
+    this.rentings$ = this.rentingService.getAllByUser();
   }
 }

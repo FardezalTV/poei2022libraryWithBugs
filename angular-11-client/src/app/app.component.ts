@@ -20,12 +20,14 @@ export class AppComponent implements OnInit {
 
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
-      this.roles = user.roles;
+      // tslint:disable-next-line:no-non-null-assertion
+      this.roles = user!.roles;
 
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
 
-      this.username = user.username;
+      // tslint:disable-next-line:no-non-null-assertion
+      this.username = user!.username;
     }
   }
 

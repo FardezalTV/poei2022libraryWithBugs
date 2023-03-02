@@ -1,14 +1,13 @@
-package com.bezkoder.springjwt.controllers;
+package com.freestack.controllers;
 
-import com.bezkoder.springjwt.models.Renting;
-import com.bezkoder.springjwt.models.User;
-import com.bezkoder.springjwt.repository.RentingRepository;
-import com.bezkoder.springjwt.repository.UserRepository;
+import com.freestack.models.Renting;
+import com.freestack.models.User;
+import com.freestack.repository.RentingRepository;
+import com.freestack.repository.UserRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -40,9 +39,11 @@ public class RentingController {
 		return rentingRepository.findAll();
 	}
 
+
 	@PostMapping
 	public Renting create(@RequestBody Renting renting) {
-		// TODO on ne peut pas créer de location
+		// TODO 4 on ne peut pas créer de location sans fetcher user et book
+		// TODO aml 1 on voudrait controler que le user est bien celui loggé
 		return rentingRepository.save(renting);
 	}
 

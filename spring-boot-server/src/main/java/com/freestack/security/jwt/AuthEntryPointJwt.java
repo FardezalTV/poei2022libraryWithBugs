@@ -1,4 +1,4 @@
-package com.bezkoder.springjwt.security.jwt;
+package com.freestack.security.jwt;
 
 import java.io.IOException;
 

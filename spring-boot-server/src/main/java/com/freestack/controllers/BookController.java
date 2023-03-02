@@ -1,9 +1,9 @@
-package com.bezkoder.springjwt.controllers;
+package com.freestack.controllers;
 
-import com.bezkoder.springjwt.models.Author;
-import com.bezkoder.springjwt.models.Book;
-import com.bezkoder.springjwt.repository.AuthorRepository;
-import com.bezkoder.springjwt.repository.BookRepository;
+import com.freestack.models.Author;
+import com.freestack.models.Book;
+import com.freestack.repository.AuthorRepository;
+import com.freestack.repository.BookRepository;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,17 +22,13 @@ public class BookController {
 		this.authorRepository = authorRepository;
 	}
 
-
-	@GetMapping("/all")//TODO ameliorer le REST
+	@GetMapping("/all")
 	public List<Book> listAll() {
 		return bookRepository.findAll();
 	}
 
 	@PostMapping
 	public Book create(@RequestBody Book book) {
-		// TODO on ne peut pas créer de livre avec le meme titre
-		Author author = authorRepository.findById(book.getAuthor().getId()).get();
-		book.setAuthor(author);
 		return bookRepository.save(book);
 	}
 
@@ -43,7 +39,7 @@ public class BookController {
 		return bookRepository.findBooksByAuthor(author);
 	}
 
-	@GetMapping("/recommendations")//TODO créer un systeme de recommandation selon les auteurs des livres lus par les users
+	@GetMapping("/recommendations")
 	public List<Book> findRecommendations() {
 		return bookRepository.findAllByOrderByIdAsc();
 	}

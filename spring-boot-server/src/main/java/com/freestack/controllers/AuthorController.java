@@ -1,9 +1,9 @@
-package com.bezkoder.springjwt.controllers;
+package com.freestack.controllers;
 
-import com.bezkoder.springjwt.models.Author;
-import com.bezkoder.springjwt.models.Book;
-import com.bezkoder.springjwt.repository.AuthorRepository;
-import com.bezkoder.springjwt.repository.BookRepository;
+import com.freestack.models.Author;
+import com.freestack.models.Book;
+import com.freestack.repository.AuthorRepository;
+import com.freestack.repository.BookRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -43,7 +43,6 @@ public class AuthorController {
 	@DeleteMapping("/{authorId}")
 	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
 	public ResponseEntity delete(@PathVariable Long authorId) {
-		//TODO on ne peut pas supprimer un auteur ayant un livre
 		authorRepository.deleteById(authorId);
 		return ResponseEntity.ok().build();
 	}

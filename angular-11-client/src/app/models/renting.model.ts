@@ -1,10 +1,9 @@
-import { Author } from './author.model';
+import { Book } from './book.model';
 
-export class Book {
+export class Renting {
   id: number;
-  title: string;
-  isbn: string;
-  description: string;
-  parutionDate: Date;
-  author: Author;
+  book: Book;
+  user: any;
+  startDate: Date;
+  endDate: Date;
 }
