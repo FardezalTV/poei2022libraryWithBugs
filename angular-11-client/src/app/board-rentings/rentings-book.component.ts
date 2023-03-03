@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { BookService } from '../_services/book.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Book } from '../models/book.model';
 import { Author } from '../models/author.model';
 import { AuthorService } from '../_services/author.service';
 import { RentingService } from '../_services/renting.service';
 import { Renting } from '../models/renting.model';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-rentings',
@@ -38,8 +39,8 @@ export class RentingsBookComponent implements OnInit {
     this.listRentings();
   }
 
-  listBooks(byRecommendation= false): void {
-    if(byRecommendation){
+  listBooks(byRecommendation = false): void {
+    if (byRecommendation) {
       this.books$ = this.bookService.getByRecommendations();
     } else {
       this.books$ = this.bookService.getAll();
@@ -57,7 +58,10 @@ export class RentingsBookComponent implements OnInit {
 
   updateRenting(renting: Renting): void {
     renting.endDate = new Date();
-    this.rentingService.save(renting).subscribe(() => this.listRentings());
+    this.rentingService.save(renting).pipe(catchError((error) => {
+      alert(error);
+      return of(error);
+    })).subscribe(() => this.listRentings());
   }
 
   listRentings(): void {

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Book } from '../models/book.model';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
 import { Renting } from '../models/renting.model';
 
@@ -31,7 +31,10 @@ export class RentingService {
 
   public save(renting: Renting): Observable<Renting> {
     return this.http.post(API_URL, renting)
-      .pipe(map(response => {
+      .pipe(catchError((errorMessage) => {
+        alert(JSON.stringify(errorMessage));
+        return of();
+      }), map(response => {
           return plainToClass(Renting, response as Renting);
         }
       ));

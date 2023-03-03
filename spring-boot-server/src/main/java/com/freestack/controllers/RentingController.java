@@ -4,10 +4,14 @@ import com.freestack.models.Renting;
 import com.freestack.models.User;
 import com.freestack.repository.RentingRepository;
 import com.freestack.repository.UserRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -41,10 +45,16 @@ public class RentingController {
 
 
 	@PostMapping
-	public Renting create(@RequestBody Renting renting) {
-		// TODO 4 on ne peut pas créer de location sans fetcher user et book
-		// TODO aml 1 on voudrait controler que le user est bien celui loggé
-		return rentingRepository.save(renting);
+	public ResponseEntity<Renting> save(@RequestBody Renting renting) {
+		if(renting.getId() == null){
+			if(rentingRepository.existsByBook_IdAndEndDateNull(renting.getBook().getId())){
+				return ResponseEntity.status(HttpStatus.CONFLICT).build();
+			}
+			renting.setStartDate(LocalDateTime.now());
+			renting.setDueDate(LocalDate.now().plusDays(14));
+		}
+
+		return ResponseEntity.ok(rentingRepository.save(renting));
 	}
 
 }
