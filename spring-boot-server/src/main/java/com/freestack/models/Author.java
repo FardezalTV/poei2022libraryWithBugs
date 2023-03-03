@@ -9,14 +9,13 @@ import java.util.List;
 @Entity
 @Table(name = "authors",
 uniqueConstraints = {
-@UniqueConstraint(columnNames = "firstName"),
-@UniqueConstraint(columnNames = "lastName")
+@UniqueConstraint(columnNames = {"firstName","lastName"})
 })
 public class Author {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@OneToMany(mappedBy = "author")
+	@OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE)
 	@JsonIgnore
 	private List<Book> books;
 	private String firstName;
