@@ -52,12 +52,12 @@ export class RentingsBookComponent implements OnInit {
     renting.book = book;
     renting.user = this.tokenStorage.getUser();
     delete renting.user.roles;
-    this.rentingService.save(renting).subscribe();
+    this.rentingService.save(renting).subscribe(() => this.listRentings());
   }
 
   updateRenting(renting: Renting): void {
     renting.endDate = new Date();
-    this.rentingService.save(renting).subscribe();
+    this.rentingService.save(renting).subscribe(() => this.listRentings());
   }
 
   listRentings(): void {

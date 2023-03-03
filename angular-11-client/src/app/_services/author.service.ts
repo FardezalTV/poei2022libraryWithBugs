@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Book } from '../models/book.model';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
 import { Author } from '../models/author.model';
 import { error } from 'protractor';
@@ -39,9 +39,11 @@ export class AuthorService {
 
   }
 
-  public delete(author: Author): void {
-    this.http.delete(API_URL + author.id).subscribe(() => {
-    }, (errorMessage) => alert(JSON.stringify(errorMessage)));
+  public delete(author: Author): Observable<any> {
+    return this.http.delete(API_URL + author.id).pipe(catchError((errorMessage) => {
+      alert(JSON.stringify(errorMessage));
+      return of();
+    }));
   }
 
 

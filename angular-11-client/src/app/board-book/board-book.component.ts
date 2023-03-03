@@ -29,26 +29,37 @@ export class BookComponent implements OnInit {
 
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService,
               private bookService: BookService, private authorService: AuthorService) {
-    debugger;
     this.isAdmin = tokenStorage.getUser()?.roles.includes('ROLE_ADMIN') ?? false;
   }
 
   ngOnInit(): void {
+    this.loadLists();
+  }
+
+  loadLists(): void {
     this.books$ = this.bookService.getAll();
     this.authors$ = this.authorService.getAll();
   }
 
   saveBook(): void {
-    this.bookService.create(this.book).subscribe(() => this.book = new Book());
+    this.bookService.create(this.book).subscribe(() => {
+      this.book = new Book();
+      this.loadLists();
+    });
   }
 
   saveAuthor(): void {
-    this.authorService.create(this.author).subscribe(() => this.author = new Author());
+    this.authorService.create(this.author).subscribe(() => {
+      this.author = new Author();
+      this.loadLists();
+    });
   }
 
 
   deleteAuthor(author: Author): void {
-    this.authorService.delete(author);
+    this.authorService.delete(author).subscribe(() => {
+      this.loadLists();
+    });
 
   }
 }
